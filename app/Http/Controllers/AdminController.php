@@ -73,7 +73,6 @@ class AdminController extends Controller
                 'name' => 'required',
                 'email' => 'email|required',
                 'username' => 'required',
-                'no_telp' => 'required',
             ]);
 
             $user = Auth::user();
@@ -457,7 +456,6 @@ class AdminController extends Controller
                 'nip' => 'required',
                 'username' => 'required',
                 'email' => 'email|required',
-                'no_telp' => 'required',
             ]);
 
             $teacher = User::findOrFail($id);
@@ -609,7 +607,6 @@ class AdminController extends Controller
             'tahun_masuk' => 'required',
             'username' => 'required',
             'email' => 'email',
-            'no_telp' => 'required',
         ]);
         $student = User::findOrFail($id);
         $student->name = $request->name;
@@ -669,7 +666,6 @@ class AdminController extends Controller
             "nip" => 'required|unique:users',
             "username" => 'required|unique:users',
             "email" => 'required|unique:users',
-            "no_telp" => 'required',
             "password" => 'required',
         ]);
         $request['password'] = bcrypt($request['password']);
@@ -710,7 +706,6 @@ class AdminController extends Controller
             "email" => 'required|unique:users',
             "kelas" => 'required',
             "tahun_masuk" => 'required',
-            "no_telp" => 'required',
             "password" => 'required|min:5',
         ]);
         $request['password'] = bcrypt($request['password']);
@@ -738,6 +733,152 @@ class AdminController extends Controller
     }
     /* ----------------------------------- END OF USER MANAGER SECTION ----------------------------------- */
 
+
+    public function createAdmin(Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required',
+            "username" => 'required|unique:users',
+            "email" => 'required|unique:users',
+            "password" => 'required|min:5',
+        ]);
+        $request['password'] = bcrypt($request['password']);
+        $admin = User::create([
+            'name' => $request->input('name'),
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'no_telp' => $request->input('no_telp'),
+            'password' => $request->input('password')
+
+        ]);
+        $admin->roles()->attach(Role::where('name', 'Admin')->first());
+        
+
+
+        return back()->with('success','Admin telah berhasil dibuat...');
+    }
+
+    public function showCreateAdmin()
+    {
+        $user = Auth::user();
+    	return view('pages.okemin.user.admin.createAdmin', compact('user'));
+    }
+
+    public function EditPasswordAdmin($id, Request $request)
+    {
+        $request->validate([
+            'new_password' => ['required'],
+            'confirm_new_password' => ['same:new_password'],
+        ]);
+        $admin = User::findOrFail($id);
+        User::find($admin->id)->update(['password'=> Hash::make($request->new_password)]);
+
+        $request->session()->flash('message.password', 'Password was successfully updated!');
+
+        return redirect()->back();
+    }
+
+    public function showProfileAdmin($id)
+    {
+        $user = Auth::user();
+        $admin = User::findOrFail($id);
+    	return view('pages.okemin.user.admin.profile.profilePage', compact('user', 'admin'));
+    }
+
+    public function editProfileAdmin($id, Request $request)
+    {
+
+        $this->validate($request,[
+            'name' => 'required',
+            'username' => 'required',
+            'email' => 'email',
+            'no_telp' => 'required',
+        ]);
+        $admin = User::findOrFail($id);
+        $admin->name = $request->name;
+        $admin->username = $request->username;
+        $admin->email = $request->email;
+        $admin->no_telp = $request->no_telp;
+        $admin->save();
+
+
+        $request->session()->flash('message.profile', 'Profile Details was successfully updated!');
+
+        return redirect()->back();
+    }
+
+    public function searchAdmin(Request $request)
+	{
+        $user = Auth::user(); // Untuk Photo Profile
+
+		// menangkap data pencarian
+		$search = $request->table_search;
+
+    		// mengambil data dari table materi sesuai pencarian data
+        $search = User::whereHas('roles', function($q){
+            $q->where('name', 'Admin');
+        })->where('name','like',"%".$search."%")
+        ->orWhere('username','like',"%".$search."%")
+        ->get();
+
+
+    		// mengirim data materi ke view index
+		return view('pages.okemin.user.admin.showAdminFiltered', compact('search', 'user') );
+    }
+
+    /**
+     * This is For Delete Teacher User
+     *
+     */
+    public function deleteAdmin($id)
+    {
+        $user = Auth::user(); // Untuk Photo Profile
+        $admin = User::findOrFail($id);
+        $admin->delete();
+        return redirect()->back()->with('success', 'Admin Berhasil diHapus.');
+    }
+
+    // Profile
+    /*
+     * This is For Profile Picture
+     *
+     */
+    public function profilePictureAdmin($id)
+    {
+        $user = Auth::user();
+        $admin = User::findOrFail($id);
+        return view('pages.okemin.user.admin.profile.picture', compact('user', 'admin',));
+    }
+
+    public function updateAvatarAdmin($id, Request $request){
+
+        $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]);
+
+        $admin = User::findOrFail($id);
+
+        $avatarName = $admin->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
+
+        $request->avatar->storeAs('avatars',$avatarName);
+
+        $admin->avatar = $avatarName;
+        $admin->save();
+
+        return back()
+            ->with('success','You have successfully upload image.');
+    }
+
+    public function showAdminList()
+    {
+        $user = Auth::user(); // Untuk Photo Profile
+
+        $admin = User::whereHas('roles', function($q){
+            $q->where('name', 'Admin');
+        })->get();
+
+        return view('pages.okemin.user.admin.showAdminList', compact('user', 'admin',));
+    }
 }
 
 

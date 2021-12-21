@@ -23,7 +23,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card card-primary">
                 <div class="card-header" style="background-color: darkblue;">
                     <h3 class="card-title">Create Mata Pelajaran</h3>
@@ -46,8 +46,8 @@
                 <form role="form" action="/Okemin/Mapel/Create/Send" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
-                        <label for="input1" class="col-sm-2 col-form-label">Nama Mata Pelajaran</label>
-                        <div class="col-sm-10">
+                        <label for="input1" class="col-sm-4 col-form-label">Nama Mata Pelajaran</label>
+                        <div class="col-sm-8">
                           <input name="nama_mapel" type="name" class="form-control" id="input1" placeholder="Nama Mata Pelajaran">
                             @if($errors->has('nama_mapel'))
                                 <div class="text-danger">

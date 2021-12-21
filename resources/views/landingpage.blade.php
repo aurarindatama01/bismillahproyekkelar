@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Elearning SmpN1Lohbener</title>
+    <title>Elearning SMPN1Lohbener</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -129,7 +129,7 @@
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="{{asset('assets/img/banner_img_02.jpeg')}}" height="500" width="500" align="right" alt="">
+                            <img class="img-fluid" src="{{asset('assets/img/saloh.jpg')}}" height="500" width="500" align="right" alt="">
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left align-self-center">

@@ -45,7 +45,7 @@ class mataPelajaran extends Model
             ->withTimestamps();
     }
 
-    // public function jawabanmapel(){
-    //     return $this->hasMany('App\JawabanTugas');
-    // }
+    public function jawabanmapel(){
+        return $this->hasMany(JawabanTugas::class);
+    }
 }

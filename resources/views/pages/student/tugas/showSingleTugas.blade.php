@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card card-primary">
-                    <div class="card-header">
+                    <div class="card-header" style="background-color: darkblue;">
                         <h3 class="card-title">{{ $singleExercise->nama_exercise}}</h3>
                     </div>
                     <!-- /.card-header -->
@@ -37,7 +37,18 @@
                     </div>
                     <!-- /.card-body -->
                 </div>
-                <button name="submit" class="btn btn-block bg-gradient-primary"><a href="student/jawaban/createJawaban/{{$singleExercise->id}}">Jawab</a></button>
+
+                <?php
+                    $cek = DB::table("jawaban_tugas")
+                            ->where("id_exercise", $singleExercise->id)
+                            ->first();
+                ?>
+                @if($cek)
+
+                <button name="submit" class="btn btn-block bg-gradient" style="background-color: darkblue; color: white;"><a href="student/jawaban/editJawaban/{{$singleExercise->id}}">Lihat Jawaban</a></button>
+                @else
+                <button name="submit" class="btn btn-block bg-gradient" style="background-color: darkblue; color: white;"><a href="student/jawaban/createJawaban/{{$singleExercise->id}}">Jawab</a></button>
+                @endif
                 <!-- /.card -->
             </div>
 
@@ -58,7 +69,8 @@
                             <h4><strong>Info :</strong></h4>
                             <p><strong>Mata Pelajaran :</strong>  {{ $singleExercise->mapel }}</p>
                             <p><strong>Untuk Kelas :</strong>  {{ $singleExercise->kelas }}</p>
-                            <p><strong>File :</strong><a href="{{url('/Teacher/Exercise/downloadtugas', $singleExercise->file)}}">  {{ $singleExercise->file }}</a></p>
+                            <p><strong>Batas Waktu :</strong>  {{ $singleExercise->bataswaktu }}</p>
+                            <p><strong>File :</strong><a href="{{url('/Student/Exercise/downloadtugas', $singleExercise->file)}}">  {{ $singleExercise->file }}</a></p>
                             <br>
                         </div>
                         <!-- /.card-body -->

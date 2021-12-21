@@ -255,7 +255,18 @@ class TeacherController extends Controller
             'kelas' => 'required',
             'judul' => 'required',
             'isi' => 'required',
+            'file' => 'required|mimes:pdf,docx,doc,pptx,ppt,xls,xlsx,jpeg,png,jpg,mp4|',
+            
         ]);
+
+        // menyimpan data file yang diupload ke variabel $file
+		$file = $request->file('file');
+ 
+		$nama_file = time()."_".$file->getClientOriginalName();
+ 
+      	        // isi dengan nama folder tempat kemana file diupload
+		$tujuan_upload = 'data_file';
+		$file->move($tujuan_upload,$nama_file);
 
         $materi = Materi::findOrFail($id);
         $materi->mapel = $request->mapel;
@@ -264,6 +275,7 @@ class TeacherController extends Controller
         $materi->isi = $request->isi;
         $materi->kesimpulan = $request->kesimpulan;
         $materi->keterangan = $request->keterangan;
+        $materi->file = $request->file;
         $materi->save();
 
         return back()->with('success','Materi Berhasil diUpdate/diEdit.');
@@ -329,6 +341,7 @@ class TeacherController extends Controller
             'nama_exercise' => $request->nama_exercise,
             'deskripsi' => $request->deskripsi,
             'file' => $nama_file,
+            'bataswaktu' => $request->bataswaktu,
             'user_id_teacher' => Auth::user()->id,
         ]);
 
@@ -455,6 +468,53 @@ class TeacherController extends Controller
 
         return dd( $request->input('question.*') );
 
+
+    }
+
+    //Jawaban Tugas Siswa
+    public function showMapelJawaban()
+    {
+        $user = Auth::user();
+        $mapels = mataPelajaran::get();
+    	return view('pages.teacher.jawaban.showMapel', compact('user', 'mapels'));
+    }
+
+    public function showTugasList($id)
+    {
+        $user = Auth::user();
+
+        $mapel = mataPelajaran::findOrFail($id);
+
+        $exercises = Exercise::where('user_id_teacher', Auth::user()->id)->where('mapel', $mapel->nama_mapel)->get();
+
+    	return view('pages.teacher.jawaban.showJawabanList', compact('user', 'mapel', 'exercises'));
+    }
+
+
+    public function showJawabanList($id)
+    {
+        $user = Auth::user();
+
+        $mapel = mataPelajaran::findOrFail($id);
+
+        $exercises = Exercise::where('kelas', $user->kelas)->where('mapel', $mapel->nama_mapel)->get();
+
+        $jawaban = JawabanTugas::where('id_mapel', $mapel->nama_mapel)->where('id_exercise', $exercises->nama_exercise)->get();
+
+    }
+
+    public function showSingleJawaban($id)
+    {
+        $user = Auth::user();
+
+        $jawaban = JawabanTugas::findOrFail($id);
+        
+        return view('pages.teacher.jawaban.showSingleJawaban', compact('user', 'singleExercise'));
+    }
+    public function downloadJawaban(Request $request,$file) {
+
+
+        return response()->download(public_path('file_jawab/'.$file));
 
     }
 }

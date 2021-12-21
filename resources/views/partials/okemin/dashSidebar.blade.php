@@ -14,7 +14,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
             @if($user->avatar)
-                <img src="/storage/avatars/{{ $user->avatar }}" class="img-circle elevation-2" alt="User Image">
+                <img src="/storage/avatars/{{ $user->avatar }}" class="img-circle elevation-2" alt="User Image" height="50px">
             @else
                 <img src="{{ asset('/storage/avatars/defaultAvatar.png') }}" class="img-circle elevation-2" alt="User Image">
             @endif
@@ -56,7 +56,7 @@
                         <li class="nav-item">
                             <a href="{{ url('/Okemin/Profile/Picture')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Change Profile Picture</p>
+                                <p>Ubah Photo Profil</p>
                             </a>
                         </li>
                     </ul>
@@ -71,6 +71,12 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                            <a href="{{ url('/Okemin/User/Admin/List')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Management Admin</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ url('/Okemin/User/Student/List')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>

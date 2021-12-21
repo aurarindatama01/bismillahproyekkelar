@@ -24,9 +24,9 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="card card-primary">
-                <div class="card-header">
+                <div class="card-header" style="background-color: darkblue;">
                     <h3 class="card-title">Create Student</h3>
                 </div>
                 <!-- /.card-header -->
@@ -165,7 +165,7 @@
                     
 
                     <div class="form-group row">
-                        <label for="input12" class="col-sm-2 col-form-label">No.Telp*</label>
+                        <label for="input12" class="col-sm-2 col-form-label">No.Telp</label>
                         <div class="col-sm-10">
                           <input name="no_telp" type="text" class="form-control" id="input11" placeholder="Nomor Telepon/HP">
                             @if($errors->has('no_telp'))
@@ -177,7 +177,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="input13" class="col-sm-2 col-form-label">Password</label>
+                        <label for="input13" class="col-sm-2 col-form-label">Password*</label>
                         <div class="col-sm-10">
                           <input name="password" type="password" class="form-control" id="input12" placeholder="Password">
                             @if($errors->has('password'))
@@ -187,7 +187,7 @@
                             @endif
                         </div>
                     </div>
-                    <button name="submit" type="submit" class="btn btn-block bg-gradient-primary">Upload</button>
+                    <button name="submit" type="submit" class="btn btn-block bg-gradient" style="background-color: darkblue; color: white;">Upload</button>
                 </form>
 
                 </div>

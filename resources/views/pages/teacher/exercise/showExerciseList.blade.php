@@ -51,6 +51,7 @@
                         <th>Kelas</th>
                         <th>Nama Tugas</th>
                         <th>Deskripsi</th>
+                        <th>Batas Waktu</th>
                         <th>File</th>
                         <th>Edit Tugas</th>
                       </tr>
@@ -62,10 +63,11 @@
                             <td>{{ $exercise->kelas }}</td>
                             <td>{{ $exercise->nama_exercise }}</td>
                             <td>{{ $exercise->deskripsi }}</td>
-                            <td><a href="{{url('/Teacher/Exercise/downloadtugas', $exercise->file)}}">{{ $exercise->file}}</a></td>
+                            <td>{{ $exercise->bataswaktu}}
+                            <td><a href="{{url('/Teacher/Exercise/downloadtugas', $exercise->file)}}">download</a></td>
                           
                             <td>
-                                <a type="button" class="btn btn-block bg-primary btn-xs" href="/Teacher/Exercise/Edit/{{ $exercise->id }}">Edit</a>
+                                <a type="button" class="btn btn-block bg btn-xs" href="/Teacher/Exercise/Edit/{{ $exercise->id }}" style="background-color: darkblue; color:white">Edit</a>
                                 <a type="button" class="btn btn-block bg-danger btn-xs" href="/Teacher/Exercise/Delete/{{ $exercise->id }}">Delete</a>
                             </td>
                         </tr>

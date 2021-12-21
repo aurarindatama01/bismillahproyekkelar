@@ -68,9 +68,9 @@
                     <div class="card">
                         <div class="card-header p-2">
                         <ul class="nav nav-pills">
-                            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Profile Details</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#password" data-toggle="tab">Change Password</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Detail Profil</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Ubah Profil</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#password" data-toggle="tab">Ubah Password</a></li>
                         </ul>
 
                         </div><!-- /.card-header -->
@@ -98,7 +98,7 @@
 
                                             <h6>Tanggal Lahir :</h6>
                                             @if($user->tgl_lahir)
-                                                <p>{{ $user->tgl_lahir }}/{{ $user->bulan_lahir }}/{{ $user->tahun_lahir }}</p>
+                                                <p>{{ $user->tgl_lahir }}</p>
                                             @else
                                                 <p>Kosong...</p>
                                             @endif
@@ -282,7 +282,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Username*</label>
                                         <div class="col-sm-10">
-                                            <input  name="username" type="text" class="form-control" placeholder="Username" value="{{ $user->username }}">
+                                            <input  name="username" type="text" class="form-control" placeholder="Username" value="{{ $user->username }}" readonly="disabled">
                                             @if($errors->has('username'))
                                                 <div class="text-danger">
                                                     {{ $errors->first('username')}}
@@ -340,9 +340,9 @@
                                     @csrf
                                     {{ method_field('POST') }}
                                     <div class="form-group row">
-                                        <label for="inputName" class="col-sm-2 col-form-label">Current Password</label>
+                                        <label for="inputName" class="col-sm-2 col-form-label">Password Saat Ini</label>
                                         <div class="col-sm-10">
-                                            <input name="current_password" type="password" class="form-control" id="inputName" placeholder="Your Current Password">
+                                            <input name="current_password" type="password" class="form-control" id="inputName" placeholder="Password saat ini">
                                             @if($errors->has('current_password'))
                                                 <div class="text-danger">
                                                     {{ $errors->first('current_password')}}
@@ -352,9 +352,9 @@
                                     </div>
 
                                     <div class="form-group row">
-                                            <label for="inputName" class="col-sm-2 col-form-label">New Password</label>
+                                            <label for="inputName" class="col-sm-2 col-form-label">Password Baru</label>
                                             <div class="col-sm-10">
-                                                <input name="new_password" type="password" class="form-control" id="inputName" placeholder="Your New Password">
+                                                <input name="new_password" type="password" class="form-control" id="inputName" placeholder="Password baru">
                                                 @if($errors->has('new_password'))
                                                     <div class="text-danger">
                                                         {{ $errors->first('new_password')}}
@@ -364,9 +364,9 @@
                                         </div>
 
                                     <div class="form-group row">
-                                        <label for="inputEmail" class="col-sm-2 col-form-label">Confirm New Password</label>
+                                        <label for="inputEmail" class="col-sm-2 col-form-label">Konfirmasi Password Baru</label>
                                         <div class="col-sm-10">
-                                            <input name="confirm_new_password" type="password" class="form-control" id="inputEmail" placeholder="Enter Your New Password, Again.">
+                                            <input name="confirm_new_password" type="password" class="form-control" id="inputEmail" placeholder="Konfirmasi password baru">
                                             @if($errors->has('confirm_new_password'))
                                                 <div class="text-danger">
                                                     {{ $errors->first('confirm_new_password')}}

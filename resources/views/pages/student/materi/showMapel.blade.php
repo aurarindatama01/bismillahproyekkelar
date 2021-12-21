@@ -33,7 +33,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                 <div class="inner">
-                    <h4>{{ $m->nama_mapel }}</h4>
+                    <h5>{{ $m->nama_mapel }}</h5>
                     <br>
                     <p style="line-height:0px;">{{ $user->kelas }}</p>
                 </div>

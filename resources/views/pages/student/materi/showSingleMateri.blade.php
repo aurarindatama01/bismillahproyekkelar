@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card card-primary">
-                    <div class="card-header">
+                    <div class="card-header" style="background-color: darkblue;">
                         <h3 class="card-title">{{ $singleMateri->judul }}</h3>
                     </div>
                     <!-- /.card-header -->
@@ -59,7 +59,7 @@
                             <h4><strong>Info :</strong></h4>
                             <p><strong>Mata Pelajaran :</strong>  {{ $singleMateri->mapel }}</p>
                             <p><strong>Untuk Kelas :</strong>  {{ $singleMateri->kelas }}</p>
-                            <p><strong>File :</strong><a href="{{url('/Teacher/Materi/downloadmateri', $singleMateri->file)}}">{{ $singleMateri->file }}</a></p>
+                            <p><strong>File :</strong><a href="{{url('/Student/Materi/downloadmateri', $singleMateri->file)}}">{{ $singleMateri->file }}</a></p>
                             <br>
                             <h4><strong>Keterangan :</strong></h4>
                             <p>{{ $singleMateri->keterangan }}</p>

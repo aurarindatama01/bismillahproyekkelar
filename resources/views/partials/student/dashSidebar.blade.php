@@ -57,7 +57,7 @@
                         <li class="nav-item">
                             <a href="{{ url('/Student/Profile/Picture')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon" style="color: white;"></i>
-                                <p style="color: white;">Change Profile Picture</p>
+                                <p style="color: white;">Ubah Photo Profil</p>
                             </a>
                         </li>
                     </ul>
@@ -101,7 +101,7 @@
                         <li class="nav-item">
                             <a href="{{ url('/Student/Tugas/Jawaban/List')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon" style="color: white;"></i>
-                                <p style="color: white;">Mengumpulkan Tugas</p>
+                                <p style="color: white;">Lihat Jawaban</p>
                             </a>
                         </li>
                     </ul>

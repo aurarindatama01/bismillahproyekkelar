@@ -1,6 +1,6 @@
 @extends('layouts.dash')
 
-@section('title', 'Pilih Materi')
+@section('title', 'Pilih Tugas')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Materi -> Pilih Mata Pelajaran</h1>
+                    <h1>Tugas -> Pilih Tugas</h1>
                     </div>
                 <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item">Materi</li>
+                    <li class="breadcrumb-item">Tugas</li>
                     <li class="breadcrumb-item">Pilih Mapel</li>
                     <li class="breadcrumb-item">Pilih Tugas</li>
                 </ol>

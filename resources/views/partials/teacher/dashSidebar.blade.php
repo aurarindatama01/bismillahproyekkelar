@@ -57,7 +57,7 @@
                     <li class="nav-item">
                         <a href="{{ url('/Teacher/Profile/Picture')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Change Profile Picture</p>
+                            <p>Ubah Photo Profil</p>
                         </a>
                     </li>
                 </ul>
@@ -98,6 +98,15 @@
                         <a href="{{ url('/Teacher/Exercise/List/')}}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>List Tugas</p>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ url('/Teacher/Tugas/Mapel')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Jawaban Tugas Siswa</p>
                         </a>
                     </li>
                 </ul>

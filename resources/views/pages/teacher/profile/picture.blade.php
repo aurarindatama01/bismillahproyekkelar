@@ -23,10 +23,10 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="card card-primary">
                 <div class="card-header" style="background-color: darkblue">
-                    <h3 class="card-title">Change Photo Profile</h3>
+                    <h3 class="card-title">Ubah Photo Profil</h3>
                 </div>
                 <!-- /.card-header -->
 
@@ -38,13 +38,13 @@
                                 <div class="alert alert-success alert-block">
                                     <button type="button" class="close" data-dismiss="alert">×</button>
                                     <strong>{{ $message }}</strong>
-                                    <p>Please, Clear "Cache" if picture not appear... </p>
+                                    <p>Hapus Sampah Jika Profil Tidak Muncul  </p>
                                 </div>
                             @endif
 
                             @if (count($errors) > 0)
                                 <div class="alert alert-danger">
-                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <strong>Oops..!</strong> Inputanmu Tidak Sesuai dengan Ketentuan<br><br>
                                     <ul>
                                         @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>
@@ -71,11 +71,11 @@
                         <input name="avatar" type="file" id="exampleInputFile">
                     </div>
                     <div class="callout callout-warning">
-                        <p>Please upload a valid image file. Size of image should not be more than 2MB.</p>
+                    <p>Upload File Image. Maksimal Ukuran 2MB.</p>
                     </div>
-                    <div class="callout callout-info">
+                    <!-- <div class="callout callout-info">
                         <p>Photo in preview is your old Profile Photo, just info.</p>
-                    </div>
+                    </div> -->
                     <button name="submit" type="submit" class="btn btn-block bg-gradient" style="background-color: darkblue; color:white;">Upload</button>
                 </form>
 

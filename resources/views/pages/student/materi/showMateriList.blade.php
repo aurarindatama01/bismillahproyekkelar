@@ -35,7 +35,7 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                 <div class="inner">
-                    <h4>{{ $m->judul }}</h4>
+                    <h5>{{ $m->judul }}</h5>
                     <br>
                     <p style="line-height:0px;">{{ $m->mapel }}</p>
                     <p>{{ $m->kelas }}</P>

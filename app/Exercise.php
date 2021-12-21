@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Exercise extends Model
 {
     protected $fillable = [
-        'mapel', 'kelas', 'nama_exercise', 'deskripsi', 'file', 'user_id_teacher',
+        'mapel', 'kelas', 'nama_exercise', 'deskripsi', 'file', 'bataswaktu', 'user_id_teacher',
     ];
 
     /*
@@ -21,14 +21,8 @@ class Exercise extends Model
      * Exercise Has Many Question
      *
      */
-    // public function mapelUser()
-    // {
-    //     return $this
-    //         ->hasMany('App\Question')
-    //         ->withTimestamps();
-    // }
 
-    // public function jawabanexercise(){
-    //     return $this->hasMany('App\JawabanTugas');
-    // }
+    public function jawabanexercise(){
+        return $this->hasMany(JawabanTugas::class);
+    }
 }

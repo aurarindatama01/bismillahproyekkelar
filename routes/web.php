@@ -68,6 +68,7 @@ Route::post('/Student/Profile/changePassword/{id}', 'StudentController@editPassw
 
 
 
+
 /*
  * Routes For Kelas
  *
@@ -133,6 +134,8 @@ Route::get('/Student/Materi/Mapel', 'StudentController@showMapel')->middleware('
 Route::get('/Student/Materi/List/{id}', 'StudentController@showMateriList')->middleware('role:Student');
 Route::get('/Student/Materi/singleMateri/{id}', 'StudentController@showSingleMateri')->middleware('role:Student');
 Route::get('/Student/Materi/singleMateri/exportPdf/{id}', 'StudentController@exportPdf')->middleware('role:Student');
+Route::get('/Student/Materi/downloadmateri/{file}', 'StudentController@downloadMateri')->middleware('role:Student');
+Route::get('/Student/Exercise/downloadtugas/{file}', 'StudentController@downloadTugas')->middleware('role:Student');
 
 
 
@@ -143,7 +146,10 @@ Route::get('/Student/Tugas/singleTugas/{id}', 'StudentController@showSingleTugas
 
 
 Route::get('Student/Tugas/singleTugas/student/jawaban/createJawaban/{id}', 'StudentController@showCreateJawaban')->middleware('role:Student');
-Route::post('Student/Tugas/Create/Send', 'StudentController@CreateJawaban')->middleware('role:Student');
+Route::post('Student/Tugas/Create/Send', 'StudentController@createJawaban')->middleware('role:Student');
+Route::get('Student/Tugas/singleTugas/student/jawaban/lihatJawaban/{id}', 'StudentController@showJawaban')->middleware('role:Student');
+Route::get('Student/Tugas/singleTugas/student/jawaban/editJawaban/{id}', 'StudentController@editJawaban')->middleware('role:Student');
+Route::put('/Student/Jawaban/Update/{id}', 'StudentController@updateJawaban')->middleware('role:student');
 /*
 /**
  * Routes For Exercise & Question
@@ -167,6 +173,12 @@ Route::get('/Teacher/Exercise/downloadtugas/{file}', 'TeacherController@download
 Route::get('/Teacher/Exercise/Question/{id}', 'TeacherController@showEditQuestion')->middleware('role:Teacher');
 // Create Question - Teacher
 Route::post('/Teacher/Exercise/Question/Create/Send', 'TeacherController@createQuestion')->middleware('role:Teacher');
+
+
+//Teacher show jawaban tugas
+Route::get('/Teacher/Tugas/Mapel', 'TeacherController@showMapelJawaban')->middleware('role:Teacher');
+Route::get('/teacher/Tugas/List/{id}', 'TeacherController@showTugasList')->middleware('role:Teacher');
+Route::get('/Student/Tugas/singleTugas/{id}', 'StudentController@showSingleTugas')->middleware('role:Student');
 
 /**
  * User Manager
@@ -210,6 +222,25 @@ Route::post('/Okemin/User/Student/Profile/changePassword/{id}', 'AdminController
 Route::get('/Okemin/User/Student/Create', 'AdminController@showCreateStudent')->middleware('role:Admin');
 Route::post('/Okemin/User/Student/Create/Send', 'AdminController@createStudent')->middleware('role:Admin');
 
+
+//Admin
+// STUDENT
+// Show List
+Route::get('/Okemin/User/Admin/List', 'AdminController@showAdminList')->middleware('role:Admin');
+// Show Search Result
+Route::get('/Okemin/User/Admin/List/Search', 'AdminController@searchAdmin')->middleware('role:Admin');
+// Delete Student
+Route::get('/Okemin/User/Admin/Delete/{id}', 'AdminController@deleteAdmin')->middleware('role:Admin');
+// Photo Profile
+Route::get('/Okemin/User/Admin/Profile/Picture/{id}', 'AdminController@profilePictureAdmin')->middleware('role:Admin');
+Route::post('/Okemin/User/Admin/Profile/Picture/Send/{id}', 'AdminController@updateAvatarAdmin')->middleware('role:Admin');
+// Profile Details
+Route::get('/Okemin/User/Admin/Profile/{id}', 'AdminController@showProfileAdmin')->middleware('role:Admin');
+Route::put('/Okemin/User/Admin/Profile/Send/{id}', 'AdminController@editProfileAdmin')->middleware('role:Admin');
+Route::post('/Okemin/User/Admin/Profile/changePassword/{id}', 'AdminController@editPasswordAdmin')->middleware('role:Admin');
+// Create Student
+Route::get('/Okemin/User/Admin/Create', 'AdminController@showCreateAdmin')->middleware('role:Admin');
+Route::post('/Okemin/User/Admin/Create/Send', 'AdminController@createAdmin')->middleware('role:Admin');
 /*
  * This Routes Below is For Testing Routes
  *
@@ -221,5 +252,9 @@ Route::post('/Okemin/User/Student/Create/Send', 'AdminController@createStudent')
 //Route::get('/home', 'HomeController@index')->name('home');
 
 //STUDENS ANSWER
-Route::get('/Teacher/Tugas/Jawaban/List', 'TeacherController@showExerciseList')->middleware('role:Student');
+Route::get('/Student/Tugas/Jawaban/List', 'StudentController@showJawabanList')->middleware('role:Student');
+Route::get('/Student/Jawaban/downloadJawaban/{file}', 'StudentController@downloadJawaban')->middleware('role:Student');
+Route::get('/Teacher/Jawaban/Edit/{id}', 'StudentController@eJawaban')->middleware('role:Student');
+Route::put('/Teacher/Exercise/Update/{id}', 'TeacherController@updateExercise')->middleware('role:Teacher');
+
 

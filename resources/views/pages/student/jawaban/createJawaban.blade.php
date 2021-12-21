@@ -25,7 +25,7 @@
     <section class="content">
         <div class="col-md-12">
             <div class="card card-primary">
-                <div class="card-header">
+                <div class="card-header" style="background-color: darkblue;">
                     <h3 class="card-title">Jawaban Tugas</h3>
                 </div>
                 <!-- /.card-header -->
@@ -33,25 +33,26 @@
                 <div class="card-body">
                      <!-- Success And Fail/Error Alert -->
                      <div class="row">
-                        <!-- @if ($message = Session::get('success'))
+                        @if ($message = Session::get('success'))
                             <div class="alert alert-success alert-block">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
                                 <strong>{{ $message }}</strong>
-                                <p>Lihat di "Sidebar->Tugas->List Materi"...</p>
+                                <p>Lihat di "Sidebar->Tugas"...</p>
                             </div>
-                        @endif -->
+                        @endif
                     </div>
                     <!-- End of Success And Fail/Error Alert -->
 
-                <form role="form" action="/Student/Tugas/Create/Send" method="post" enctype="multipart/form-data">
+                    <form role="form" action="/Student/Tugas/Create/Send" method="post" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id" value="{{ $exercise->id }}">
                     <div class="form-group row">
                         <label for="input2" class="col-sm-2 col-form-label">Mata Pelajaran</label>
                         <div class="col-sm-10">
-                          <input name="id_mapel" type="text" class="form-control" id="input2">
-                            @if($errors->has('mapel'))
+                          <input name="id_mapel" type="text" class="form-control" id="input2" value="{{ $exercise->mapel }}" readonly="disabled">
+                            @if($errors->has('id_mapel'))
                                 <div class="text-danger">
-                                    {{ $errors->first('file')}}
+                                    {{ $errors->first('id_mapel')}}
                                 </div>
                             @endif
                         </div>
@@ -59,10 +60,10 @@
                     <div class="form-group row">
                         <label for="input2" class="col-sm-2 col-form-label">Nama Tugas</label>
                         <div class="col-sm-10">
-                          <input name="id_mapel" type="text" class="form-control" id="input2" >
-                            @if($errors->has('mapel'))
+                          <input name="id_exercise" type="text" class="form-control" id="input2" value="{{ $exercise->nama_exercise }}" readonly="disabled">
+                            @if($errors->has('id_exercise'))
                                 <div class="text-danger">
-                                    {{ $errors->first('file')}}
+                                    {{ $errors->first('id_exercise')}}
                                 </div>
                             @endif
                         </div>
@@ -88,9 +89,10 @@
                                     {{ $errors->first('file')}}
                                 </div>
                             @endif
+                            <br>
+                            <button name="submit" type="submit" class="btn btn" style="background-color: darkblue; color: white">Upload</button>
                         </div>
                     </div>
-                    <button name="submit" type="submit" class="btn btn-block bg-gradient-primary">Upload</button>
                 </form>
 
                 </div>

@@ -63,7 +63,7 @@
                             <td>{{ $materi->judul }}</td>
                             <td><a href="{{url('/Teacher/Materi/downloadmateri', $materi->file)}}">{{ $materi->file }}</a></td>
                             <td>
-                                <a type="button" class="btn btn-block bg-gradient-primary btn-xs" href="/Teacher/Materi/Edit/{{ $materi->id }}">Edit</a>
+                                <a type="button" class="btn btn-block bg-gradient btn-xs" href="/Teacher/Materi/Edit/{{ $materi->id }}" style="background-color: darkblue; color: white">Edit</a>
                                 <a type="button" class="btn btn-block bg-gradient-danger btn-xs" href="/Teacher/Materi/Delete/{{ $materi->id }}">Delete</a>
                             </td>
                         </tr>

@@ -23,7 +23,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card card-primary">
                 <div class="card-header" style="background-color: darkblue;">
                     <h3 class="card-title" >Create Kelas</h3>
@@ -46,8 +46,8 @@
                 <form role="form" action="/Okemin/Kelas/Create/Send" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
-                        <label for="input1" class="col-sm-2 col-form-label">Nama Kelas</label>
-                        <div class="col-sm-10">
+                        <label for="input1" class="col-sm-6 col-form-label">Nama Kelas</label>
+                        <div class="col-sm-12">
                           <input name="nama_kelas" type="name" class="form-control" id="input1" placeholder="Nama Kelas">
                             @if($errors->has('nama_kelas'))
                                 <div class="text-danger">
@@ -57,8 +57,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="input2" class="col-sm-2 col-form-label">Deskripsi Kelas</label>
-                        <div class="col-sm-10">
+                        <label for="input2" class="col-sm-6 col-form-label">Deskripsi Kelas</label>
+                        <div class="col-sm-12">
                           <input name="deskripsi" type="text" class="form-control" id="input2" placeholder="Deskripsi Kelas">
                             @if($errors->has('deskripsi'))
                                 <div class="text-danger">

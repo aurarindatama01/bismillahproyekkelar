@@ -23,9 +23,9 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="card card-primary">
-                <div class="card-header">
+                <div class="card-header" style="background-color: darkblue;">
                     <h3 class="card-title">Create Materi</h3>
                 </div>
                 <!-- /.card-header -->
@@ -121,7 +121,7 @@
                           <input name="keterangan" type="text" class="form-control" id="input2" placeholder="Keterangan">
                         </div>
                     </div>
-                    <button name="submit" type="submit" class="btn btn-block bg-gradient-primary">Upload</button>
+                    <button name="submit" type="submit" class="btn btn-block bg-gradient" style="background-color: darkblue; color: white;">Upload</button>
                 </form>
 
                 </div>

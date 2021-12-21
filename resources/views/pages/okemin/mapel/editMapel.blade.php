@@ -22,10 +22,10 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
-        <div class="col-md-12">
+    <section class="content" style="widht: ;">
+        <div class="col-md-6" >
             <div class="card card-primary">
-                <div class="card-header">
+                <div class="card-header" style="background-color:darkblue; widht: 20px;">
                     <h3 class="card-title">Edit Mata Pelajaran</h3>
                 </div>
                 <!-- /.card-header -->
@@ -47,8 +47,8 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group row">
-                        <label for="input1" class="col-sm-2 col-form-label">Nama Mata Pelajaran</label>
-                        <div class="col-sm-10">
+                        <label for="input1" class="col-sm-4 col-form-label">Nama Mata Pelajaran</label>
+                        <div class="col-sm-8" style="margin-left: 0px;">
                           <input value="{{ $mapel->nama_mapel }}" name="nama_mapel" type="name" class="form-control" id="input1" placeholder="Nama Mata Pelajaran">
                             @if($errors->has('nama_mapel'))
                                 <div class="text-danger">
@@ -57,7 +57,7 @@
                             @endif
                         </div>
                     </div>
-                    <button name="submit" type="submit" class="btn btn-block bg-gradient-primary">Upload</button>
+                    <button name="submit" type="submit" class="btn btn-block bg-gradient" style="background-color: darkblue; color: white;">Upload</button>
                 </form>
 
                 </div>

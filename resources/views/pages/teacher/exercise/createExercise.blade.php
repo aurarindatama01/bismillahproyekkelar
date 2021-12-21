@@ -23,9 +23,9 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="card card-primary">
-                <div class="card-header">
+                <div class="card-header" style="background-color: darkblue">
                     <h3 class="card-title">Create Exercise</h3>
                 </div>
                 <!-- /.card-header -->
@@ -114,7 +114,19 @@
                             @endif
                         </div>
                     </div>
-                    <button name="submit" type="submit" class="btn btn-block bg-gradient-primary">Upload</button>
+
+                    <div class="form-group row">
+                        <label for="input2" class="col-sm-2 col-form-label">Batas Waktu</label>
+                        <div class="col-sm-10">
+                            <input name="bataswaktu" type="datetime-local" class="form-control" id="input2" placeholder="Batas Waktu">
+                            @if($errors->has('bataswaktu'))
+                                <div class="text-danger">
+                                    {{ $errors->first('bataswaktu')}}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <button name="submit" type="submit" class="btn btn-block bg-gradient" style="background-color: darkblue; color: white">Upload</button>
                 </form>
 
                 </div>

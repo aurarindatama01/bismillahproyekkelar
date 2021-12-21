@@ -13,7 +13,7 @@
                 <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item active">Exercise</li>
+                    <li class="breadcrumb-item active">Tugas</li>
                     <li class="breadcrumb-item active">Edit Exercise</li>
                 </ol>
                 </div>
@@ -23,9 +23,9 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="card card-primary">
-                <div class="card-header">
+                <div class="card-header" style="background-color: darkblue">
                     <h3 class="card-title">Edit Tugas</h3>
                 </div>
                 <!-- /.card-header -->
@@ -124,7 +124,19 @@
                         </div>
                     </div>
 
-                    <button name="submit" type="submit" class="btn btn-block bg-gradient-primary">Upload</button>
+                    <div class="form-group row">
+                        <label for="input2" class="col-sm-2 col-form-label">Batas Waktu</label>
+                        <div class="col-sm-10">
+                            <input name="bataswaktu" type="datetime-local" class="form-control" id="input2" placeholder="Batas Waktu">
+                            @if($errors->has('bataswaktu'))
+                                <div class="text-danger">
+                                    {{ $errors->first('bataswaktu')}}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <button name="submit" type="submit" class="btn btn-block bg-gradient-" style="background-color: darkblue; color: white">Upload</button>
                 </form>
 
                 </div>

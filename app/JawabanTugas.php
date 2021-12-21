@@ -11,9 +11,7 @@ class JawabanTugas extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'id_mapel', 'id_tugas', 'isi', 'file', 'user_id_student',
-    ];
+    protected $guarded = [''];
 
     /**
      * This is For CRUD
@@ -22,11 +20,13 @@ class JawabanTugas extends Model
      */
     protected $table = 'jawaban_tugas';
 
+    public $timestamps = false;
+
     public function mapeljawaban(){
-        return $this->belongsTo('App\mataPelajaran');
+        return $this->hasOne(mataPelajaran::class);
     }
 
     public function exercisejawaban(){
-        return $this->belongsTo('App\Exercise');
+        return $this->hasOne(Exercise::class);
     }
 }

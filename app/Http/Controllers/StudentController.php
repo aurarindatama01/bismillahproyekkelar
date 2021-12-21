@@ -9,6 +9,7 @@ use App\Materi;
 use App\mataPelajaran;
 use App\Exercise;
 use App\Question;
+use App\JawabanTugas;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use PDF;
@@ -168,6 +169,13 @@ class StudentController extends Controller
         return $pdf->download('materi.pdf');
     }
 
+    public function downloadMateri(Request $request,$file) {
+
+
+        return response()->download(public_path('data_file/'.$file));
+
+    }
+
     /* -------------------------------------------- END OF MATERI SECTION ------------------------------------------ */
 
 
@@ -194,82 +202,168 @@ class StudentController extends Controller
         $user = Auth::user();
 
         $singleExercise = Exercise::findOrFail($id);
+        // $singleJawaban = JawabanTugas::where('id_exercise', $singleExercise->id)->get();
 
         return view('pages.student.tugas.showSingleTugas', compact('user', 'singleExercise'));
     }
+    public function downloadTugas(Request $request,$file) {
 
-    public function showCreateJawaban()
-    {
-        $user = Auth::user(); // Untuk Photo Profile
-        $mapel = mataPelajaran::all(); // Untuk Show List Mapel - Select
-        $exercise = Exercise::all(); // Untuk Show List Kelas - Select
-        return view('pages.Student.Jawaban.createJawaban', compact('user', 'exercise'));
+
+        return response()->download(public_path('file_tugas/'.$file));
+
     }
 
+    
+    //Create jawaban
     public function createJawaban(Request $request)
     {
+        //$id = $request->id;
         $this->validate($request,[
             'isi' => 'required',
-            'file' => 'required|mimes:pdf,docx,doc,pptx,ppt,xls,xlsx,jpeg,png,jpg,mp4|',
+            'file' => 'required|mimes:pdf,docx,doc,pptx,ppt,xls,xlsx,jpeg,png,jpg,mp4|'
             
         ]);
 
         // menyimpan data file yang diupload ke variabel $file
 		$file = $request->file('file');
  
-		$nama_file = time()."_".$file->getClientOriginalName();
+		$nama_files = time()."_".$file->getClientOriginalName();
  
       	        // isi dengan nama folder tempat kemana file diupload
-		$tujuan_upload = 'file_tugas';
-		$file->move($tujuan_upload,$nama_file);
+		$tujuan_upload = 'file_jawab';
+		$file->move($tujuan_upload,$nama_files);
         //$mapel = mataPelajaran::findOrFail($id);
-        $mapel = mataPelajaran::findOrFail($id);
-        $exercise = Exercise::findOrFail($id);
-
-        Materi::create([
+        
+        JawabanTugas::create([
+            'id_mapel' => $request->id,
+            'id_exercise' => $request->id,
             'isi' => $request->isi,
-            'file' => $nama_file,
-            'user_id_student' => Auth::user()->id,
+            'file' => $nama_files,
+            'user_id_student' => Auth::user()->id
         ]);
+        // JawabanTugas::create([
+        //     "id_mapel" => mataPelajaran::mapel()->id,
+        //     "id_exercise" => Exercise::exercise()->id,
+        //     'isi' => $request->isi,
+        //     'file' => $nama_file,
+        //     'user_id_student' => Auth::user()->id,
+        // ]);
 
         return back()->with('success','Jawaban Tugas Berhasil dikirim.');
     }
 
-    // public function showCreateExercise()
+
+    //Menuju tabel jawaban
+    public function showCreateJawaban($id)
+    {
+        $user = Auth::user(); // Untuk Photo Profile
+        $mapel = mataPelajaran::where("id", $id)->first(); // Untuk Show List Mapel - Select
+        $exercise = Exercise::where("id", $id)->first(); // Untuk Show List Kelas - Select
+        return view('pages.Student.Jawaban.createJawaban', compact('user', 'exercise', 'mapel'));
+    }
+    // public function showJawabanTugas($id)
+    // {
+    //     $user = Auth::user();
+    //     $jawaban = JawabanTugas::findOrFail($id);
+    //     return view('pages.student.tugas.showSingleTugas', compact('user', 'singleExercise'));
+    // }
+
+    // public function showJawaban($id)
+    // {
+    //     $user = Auth::user();
+    //     $singleExercise= Exercise::findOrFail($id);
+    //     $singleJawaban = JawabanTugas::where('user_id_student', $user->id)->first();
+    //     return view('pages.student.Jawaban.lihatJawaban', compact('user', 'singleExercise', 'singleJawaban'));
+    // }
+
+    // public function editJawaban($id)
     // {
     //     $user = Auth::user(); // Untuk Photo Profile
     //     $mapel = mataPelajaran::all(); // Untuk Show List Mapel - Select
-    //     $exercises = Exercise::all(); // Untuk Show List Kelas - Select
-    //     return view('pages.teacher.exercise.createExercise', compact('user', 'mapel', 'kelas') );
+    //     $singleExercise = Exercise::all(); // Untuk Show List Kelas - Select
+    //     $jawaban = JawabanTugas::findOrFail($id);
+    //     return view('pages.student.jawaban.updateJawaban', compact('user', 'exercise', 'mapel', 'jawaban'));
     // }
 
-    // public function createJawaban(Request $request)
+    // public function updateJawaban(Request $request, $id)
     // {
     //     $this->validate($request,[
-    //         'mapel' => 'required',
-    //         'exercise' => 'required',
     //         'isi' => 'required',
-    //         'file' => 'required|mimes:pdf,docx,doc,pptx,ppt,xls,xlsx,jpeg,png,jpg,mp4|',
+    //         'file' => 'required|mimes:pdf,docx,doc,pptx,ppt,xls,xlsx,jpeg,png,jpg,mp4|'
     //     ]);
 
-    //     $file = $request->file('file');
+    //     // menyimpan data file yang diupload ke variabel $file
+	// 	$file = $request->file('file');
  
-	// 	$nama_file = time()."_".$file->getClientOriginalName();
+	// 	$nama_files = time()."_".$file->getClientOriginalName();
  
     //   	        // isi dengan nama folder tempat kemana file diupload
-	// 	$tujuan_upload = 'file_jawaban';
-	// 	$file->move($tujuan_upload,$nama_file);
+	// 	$tujuan_upload = 'file_jawab';
+	// 	$file->move($tujuan_upload,$nama_files);
 
-    //     Exercise::create([
-    //         'id_mapel' => $request->mapel,
+    //     $jawaban = JawabanTugas::findOrFail($id);
+    //     $jawaban->id_mapel = $request->id;
+    //     $jawaban->id_exercises = $request->id;
+    //     $jawaban->isi = $request->isi;
+    //     $jawaban->file = $request->file;
 
-    //         //Assign the "mutated" kelas value to kelas column
-    //         'id_exercise' => collect($request->exercise)->implode(', '),
-    //         'deskripsi' => $request->deskripsi,
-    //         'file' => $nama_file,
-    //         'user_id_student' => Auth::user()->id,
-    //     ]);
-
-    //     return back()->with('success','Tugas Berhasil Terkirim.');
+    //     return back()->with('success','Jawaban Berhasil diUpdate/diEdit.');
     // }
+
+    public function showJawabanList()
+    {
+        $user = Auth::user(); // Untuk Photo Profile
+        $mapel = mataPelajaran::all(); // Untuk Show List Mapel - Select
+        $exercise = Exercise::all(); // Untuk Show List Kelas - Select
+        $jawaban = JawabanTugas::where( 'user_id_student', Auth::user()->id )->get();
+        return view('pages.student.jawabansiswa.showJawabanList', compact('user', 'jawaban', 'mapel') );
+    }
+
+    public function downloadJawaban(Request $request,$file) {
+
+
+        return response()->download(public_path('file_jawab/'.$file));
+
+    }
+
+    public function editJawaban($id)
+    {
+        $user = Auth::user(); // Untuk Photo Profile
+        $mapel = mataPelajaran::all(); // Untuk Show List Mapel - Select
+        $exercise = Exercise::all(); // Untuk Show List Kelas - Select
+        $jawaban = JawabanTugas::findOrFail($id);
+        return view('pages.student.jawabansiswa.editJawaban', compact('user', 'jawaban', 'mapel', 'exercise'));
+    }
+
+    /*
+     * This is For Update Materi
+     *
+     */
+    public function updateJawaban(Request $request, $id)
+    {
+        $this->validate($request,[
+            'isi' => 'required',
+            'file' => 'required|mimes:pdf,docx,doc,pptx,ppt,xls,xlsx,jpeg,png,jpg,mp4|'
+            
+        ]);
+
+        // menyimpan data file yang diupload ke variabel $file
+		$file = $request->file('file');
+ 
+		$nama_files = time()."_".$file->getClientOriginalName();
+ 
+      	        // isi dengan nama folder tempat kemana file diupload
+		$tujuan_upload = 'file_jawab';
+		$file->move($tujuan_upload,$nama_files);
+        //$mapel = mataPelajaran::findOrFail($id);
+
+        $jawaban = JawabanTugas::findOrFail($id);
+        $jawaban->id_mapel = $request->id;
+        $jawaban->id_exercise = $request->id;
+        $jawaban->isi = $request->isi;
+        $jawaban->file = $request->file;
+        $jawaban->save();
+
+        return back()->with('success','Jawaban Berhasil diUpdate/diEdit.');
+    }
 }
